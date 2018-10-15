@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { DialogContainer, TextField, Button } from 'react-md';
 import * as videoActions from '../../actions/VideoActions';
+import { getClipsSelector } from '../../utils/Utils';
 
 class VideoDetails extends PureComponent {
   static propTypes = {
@@ -70,7 +71,7 @@ class VideoDetails extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  clip: state.video.selectedIndex > 0 ? state.video.clips[state.video.selectedIndex] : {},
+  clip: state.video.selectedIndex > 0 ? getClipsSelector(state)[state.video.selectedIndex] : {},
   selectedIndex: state.video.selectedIndex || -1,
 });
 

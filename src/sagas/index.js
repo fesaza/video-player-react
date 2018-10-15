@@ -1,12 +1,14 @@
 // @flow
-import { takeLatest } from 'redux-saga/effects';
+import { takeLatest, select } from 'redux-saga/effects';
 import { ADD_CLIP, EDIT_CLIP } from '../actions/VideoActions';
+import { persistClips, getClipsSelector } from '../utils/Utils';
 
 /**
  * Save clip to local storage
  */
-function saveLocalStorage() {
-  
+function* saveLocalStorage() {
+  const clips = yield select(getClipsSelector);
+  persistClips(clips);
 }
 
 export default function* root() {

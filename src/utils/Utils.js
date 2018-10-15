@@ -1,6 +1,5 @@
 /* global localStorage */
 import { upperFirst } from 'lodash/string';
-import * as R from 'ramda';
 
 export function toTitle(str) {
   return str.split(/-|[A-Z]+/).reduce((s, split) => {
@@ -23,9 +22,14 @@ export function getClips() {
   ];
 }
 
-export function addClip(clipItem) {
-  const clipItems = getClips();
-  localStorage.setItem('clipItems', JSON.stringify(R.append(clipItem, clipItems)));
+export function persistClips(clips) {
+  localStorage.setItem('clipItems', JSON.stringify(clips));
 }
+
+/**
+ * clips selector
+ * @param {*} state
+ */
+export const getClipsSelector = state => state.video.clips;
 
 export function date() { }

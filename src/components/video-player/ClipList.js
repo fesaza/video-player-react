@@ -4,7 +4,7 @@ import { List, ListItem, FontIcon, Card, CardTitle, CardText, Button } from 'rea
 
 const styleButton = { margin: 'auto 5px auto auto' };
 
-const ClipList = ({ clips, addClip }) => (
+const ClipList = ({ clips, addClip, onClipSelected }) => (
   <Card className="md-block-centered">
     <CardTitle title="Clip list" subtitle="Select any to watch" >
       <Button
@@ -21,12 +21,15 @@ const ClipList = ({ clips, addClip }) => (
     <CardText>
       <List style={{ minWidth: '220px' }}>
         {
-          clips.map(clip => (
+          clips.map((clip, index) => (
             <ListItem
               key={clip.name}
               rightIcon={<FontIcon secondary>play_arrow</FontIcon>}
               primaryText={clip.name}
               secondaryText={`start: ${clip.start} - end: ${clip.end}`}
+              onClick={() => {
+                onClipSelected(index);
+              }}
             />
           ))
         }
@@ -38,6 +41,7 @@ const ClipList = ({ clips, addClip }) => (
 ClipList.propTypes = {
   clips: PropTypes.array.isRequired,
   addClip: PropTypes.func.isRequired,
+  selectClip: PropTypes.func.isRequired,
 };
 
 export default ClipList;

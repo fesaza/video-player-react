@@ -1,12 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Card, CardText, CardTitle, Button } from 'react-md';
 
 const initialVideo = 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4';
 const styleButton = { margin: 'auto 10px auto auto' };
 
-const VideoPlayer = () => (
+const VideoPlayer = ({ clip }) => (
   <Card className="md-block-centered">
-    <CardTitle title="video name" subtitle="start: 0:20 - end 0:30" >
+    <CardTitle title={clip.name} subtitle="start: 0:20 - end 0:30" >
       <Button
         tooltipLabel="Edit clip"
         style={styleButton}
@@ -24,5 +25,9 @@ const VideoPlayer = () => (
     </CardText>
   </Card>
 );
+
+VideoPlayer.propTypes = {
+  clip: PropTypes.object.isRequired,
+};
 
 export default VideoPlayer;
