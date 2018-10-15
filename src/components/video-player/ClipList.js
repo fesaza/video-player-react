@@ -41,7 +41,7 @@ const ClipList = ({ clips, addClip, onClipSelected }) => (
 ClipList.propTypes = {
   clips: PropTypes.array.isRequired,
   addClip: PropTypes.func.isRequired,
-  selectClip: PropTypes.func.isRequired,
+  onClipSelected: PropTypes.func.isRequired,
 };
 
 export default ClipList;
