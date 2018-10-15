@@ -1,4 +1,4 @@
-# Cars react
+# Video Player react
 
 The main frameworks and libraries used to build this project are:
 
@@ -8,7 +8,7 @@ The main frameworks and libraries used to build this project are:
 
 Clone repository
 
-```git clone https://github.com/fesaza/cars-react.git```
+```git clone https://github.com/fesaza/video-player-react```
 
 Install dependencies
 
