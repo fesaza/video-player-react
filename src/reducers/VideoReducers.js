@@ -1,5 +1,4 @@
-import _ from 'lodash';
-import fp from 'lodash/fp';
+import * as R from 'ramda';
 import * as videoActions from '../actions/VideoActions';
 import { getClips } from '../utils/Utils';
 
@@ -10,6 +9,11 @@ const video = (state = {
     case videoActions.LOAD_CLIP_LIST:
       return {
         clips: getClips(),
+      };
+    case videoActions.ADD_CLIP:
+      return {
+        ...state,
+        clips: R.append(action.clip, state.clips),
       };
     default:
       return state;

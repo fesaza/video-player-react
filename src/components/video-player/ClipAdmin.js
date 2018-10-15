@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import ClipList from './ClipList';
 import VideoPlayer from './VideoPlayer';
 import * as videoActions from '../../actions/VideoActions';
+import VideoDetails from './VideoDetails';
 
 class ClipAdmin extends PureComponent {
   static propTypes = {
@@ -20,16 +21,27 @@ class ClipAdmin extends PureComponent {
     }
   }
 
+  addClip(){
+    // show dialog
+  }
+
+  editClip(){
+
+  }
+
   render() {
     return (
-      <Grid >
-        <Cell size={3}>
-          <ClipList clips={this.props.clips} />
-        </Cell>
-        <Cell size={9}>
-          <VideoPlayer />
-        </Cell>
-      </Grid>
+      <div>
+        <Grid >
+          <Cell size={3}>
+            <ClipList clips={this.props.clips} addClip={this.addClip} />
+          </Cell>
+          <Cell size={9}>
+            <VideoPlayer />
+          </Cell>
+        </Grid>
+        <VideoDetails />
+      </div>
     );
   }
 }
