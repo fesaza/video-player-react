@@ -23,6 +23,7 @@ const ClipList = ({ clips, addClip }) => (
         {
           clips.map(clip => (
             <ListItem
+              key={clip.name}
               rightIcon={<FontIcon secondary>play_arrow</FontIcon>}
               primaryText={clip.name}
               secondaryText={`start: ${clip.start} - end: ${clip.end}`}

@@ -7,13 +7,9 @@ export const loadClips = () => ({
   type: LOAD_CLIP_LIST,
 });
 
-export const addClip = (name, start, end) => (
+export const addClip = clip => (
   {
     type: ADD_CLIP,
-    clip: {
-      name,
-      start,
-      end,
-    },
+    clip,
   }
 );

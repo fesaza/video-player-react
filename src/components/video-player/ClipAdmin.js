@@ -13,34 +13,44 @@ class ClipAdmin extends PureComponent {
     clips: PropTypes.array.isRequired,
     loadClips: PropTypes.func.isRequired,
   }
+  
+  state = { visibleDetails: false };
 
   componentDidMount() {
     const { clips, loadClips } = this.props;
-    if (!clips) {
+    if (clips.length === 0) {
       loadClips();
     }
   }
 
-  addClip(){
-    // show dialog
-  }
+  // addClip(){
+  //   // show dialog
+  // }
 
-  editClip(){
+  // editClip(){
 
-  }
+  // }
+  
+  showDetails = () => {
+    this.setState({ visibleDetails: true });
+  };
+
+  hideDetails = () => {
+    this.setState({ visibleDetails: false });
+  };
 
   render() {
     return (
       <div>
         <Grid >
           <Cell size={3}>
-            <ClipList clips={this.props.clips} addClip={this.addClip} />
+            <ClipList clips={this.props.clips} addClip={this.showDetails} />
           </Cell>
           <Cell size={9}>
             <VideoPlayer />
           </Cell>
         </Grid>
-        <VideoDetails />
+        <VideoDetails visible={this.state.visibleDetails} hide={this.hideDetails} />
       </div>
     );
   }
@@ -53,7 +63,7 @@ const mapPropsToState = state => (
 );
 
 const mapDispatchToProps = dispatch => ({
-  loadClips: dispatch(videoActions.loadClips()),
+  loadClips: () => dispatch(videoActions.loadClips()),
 });
 
 export default connect(mapPropsToState, mapDispatchToProps)(ClipAdmin);
