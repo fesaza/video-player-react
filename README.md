@@ -1,6 +1,6 @@
 # Video Player react
 
-The main frameworks and libraries used to build this project are:
+The main frameworks and libraries used to build this slice up video player are:
 
 - [React](https://reactjs.org)
 - [React-md components](https://react-md.mlaursen.com/)
