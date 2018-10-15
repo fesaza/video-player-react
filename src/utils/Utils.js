@@ -1,6 +1,6 @@
 /* global localStorage */
 import { upperFirst } from 'lodash/string';
-import R from 'ramda';
+import * as R from 'ramda';
 
 export function toTitle(str) {
   return str.split(/-|[A-Z]+/).reduce((s, split) => {
@@ -17,6 +17,8 @@ export function getClips() {
   return [
     {
       name: 'Full video',
+      start: '0',
+      end: '52',
     },
   ];
 }
