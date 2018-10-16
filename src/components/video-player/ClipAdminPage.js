@@ -2,10 +2,10 @@ import React from 'react';
 import ClipAdmin from './ClipAdmin';
 import { EditCapabilitiesContext } from '../../utils/Utils';
 
-const PlayList = () => (
-  <EditCapabilitiesContext.Provider value={true}>
+const ClipAdminPage = () => (
+  <EditCapabilitiesContext.Provider value={false}>
     <ClipAdmin />
   </EditCapabilitiesContext.Provider>
 );
 
-export default PlayList;
+export default ClipAdminPage;

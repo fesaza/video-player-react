@@ -1,5 +1,6 @@
 /* global localStorage */
 import { upperFirst } from 'lodash/string';
+import React from 'react';
 
 export function toTitle(str) {
   return str.split(/-|[A-Z]+/).reduce((s, split) => {
@@ -31,5 +32,7 @@ export function persistClips(clips) {
  * @param {*} state
  */
 export const getClipsSelector = state => state.video.clips;
+
+export const EditCapabilitiesContext = React.createContext(false);
 
 export function date() { }

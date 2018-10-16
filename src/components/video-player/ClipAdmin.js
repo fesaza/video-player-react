@@ -15,11 +15,6 @@ class ClipAdmin extends PureComponent {
     onClipSelected: PropTypes.func.isRequired,
     selectedIndex: PropTypes.number.isRequired,
     onDeleteClip: PropTypes.func.isRequired,
-    hideEditCapabilities: PropTypes.bool,
-  }
-
-  static defaultProps = {
-    hideEditCapabilities: false,
   }
 
   state = { visibleDetails: false };
@@ -49,7 +44,6 @@ class ClipAdmin extends PureComponent {
           onDeleteClip={this.props.onDeleteClip}
           clipSelected={this.props.clipSelected}
           selectedIndex={this.props.selectedIndex}
-          hideEditCapabilities={this.props.hideEditCapabilities}
         />
         <VideoDetails
           visible={this.state.visibleDetails}
