@@ -35,8 +35,8 @@ class ClipAdmin extends PureComponent {
 
   // }
 
-  showDetails = () => {
-    this.setState({ visibleDetails: true });
+  showDetails = isAdding => () => {
+    this.setState({ visibleDetails: true, isAdding });
   };
 
   hideDetails = () => {
@@ -50,19 +50,21 @@ class ClipAdmin extends PureComponent {
           <Cell size={3}>
             <ClipList
               clips={this.props.clips}
-              addClip={this.showDetails}
+              addClip={this.showDetails(true)}
               onClipSelected={this.props.onClipSelected}
             />
           </Cell>
           <Cell size={9}>
             <VideoPlayer
               clip={this.props.clipSelected}
+              editClip={this.showDetails(false)}
             />
           </Cell>
         </Grid>
         <VideoDetails
           visible={this.state.visibleDetails}
           hide={this.hideDetails}
+          isAdding={this.state.isAdding}
         />
       </div>
     );

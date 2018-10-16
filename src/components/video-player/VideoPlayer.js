@@ -7,16 +7,23 @@ import { Card, CardText, CardTitle, Button } from 'react-md';
 const initialVideo = 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4';
 const styleButton = { margin: 'auto 10px auto auto' };
 
+const playVideo = () => {
+  const vp = document.getElementById('videoPlayer');
+  vp.load();
+  // vp.play();
+};
+
 class VideoPlayer extends PureComponent {
   static propTypes = {
     clip: PropTypes.object.isRequired,
   };
 
-  componentDidUpdate() {
-    const vp = document.getElementById('videoPlayer');
-    vp.load();
-    vp.play();
+  componentWillReceiveProps = (nextProps) => {
+    if (nextProps.clip !== this.props.clip) {
+      playVideo();
+    }
   }
+
 
   render() {
     const { clip } = this.props;

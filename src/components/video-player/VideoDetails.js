@@ -50,12 +50,14 @@ class VideoDetails extends PureComponent {
           label="Clip name"
           value={clip.name}
           onChange={this.onChange('name')}
+          required
         />
         <TextField
           id="start-field"
           label="start"
           type="number"
           value={clip.start}
+          required
           onChange={this.onChange('start')}
         />
         <TextField
@@ -63,6 +65,7 @@ class VideoDetails extends PureComponent {
           label="end"
           type="number"
           value={clip.end}
+          required
           onChange={this.onChange('end')}
         />
       </DialogContainer>
@@ -70,9 +73,9 @@ class VideoDetails extends PureComponent {
   }
 }
 
-const mapStateToProps = state => ({
-  clip: state.video.selectedIndex > 0 ? getClipsSelector(state)[state.video.selectedIndex] : {},
-  selectedIndex: state.video.selectedIndex || -1,
+const mapStateToProps = (state, props) => ({
+  clip: state.video.selectedIndex > 0 && !props.isAdding ? getClipsSelector(state)[state.video.selectedIndex] : {},
+  selectedIndex: props.isAdding ? -1 : state.video.selectedIndex || -1,
 });
 
 const mapDispatchToProps = dispatch => ({
