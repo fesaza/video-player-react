@@ -18,6 +18,7 @@ class VideoPlayer extends PureComponent {
     clip: PropTypes.object.isRequired,
     editClip: PropTypes.func.isRequired,
     selectedIndex: PropTypes.number.isRequired,
+    hideEditCapabilities: PropTypes.bool.isRequired,
   };
 
   componentWillReceiveProps = (nextProps) => {
@@ -28,11 +29,13 @@ class VideoPlayer extends PureComponent {
 
 
   render() {
-    const { clip, editClip, selectedIndex } = this.props;
+    const {
+      clip, editClip, selectedIndex, hideEditCapabilities,
+    } = this.props;
     return (
       <Card className="md-block-centered">
         <CardTitle title={clip.name} subtitle={`start: ${clip.start} - end ${clip.end} (seconds)`} >
-          {selectedIndex > 0 &&
+          {selectedIndex > 0 && !hideEditCapabilities &&
             <Button
               tooltipLabel="Edit clip"
               style={styleButton}

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ListItem, Button } from 'react-md';
 
 const ClipListItem = ({
-  clip, index, onClipSelected, deleteClip,
+  clip, index, onClipSelected, deleteClip, hideEditCapabilities,
 }) => (
   <ListItem
     key={clip.name}
@@ -14,7 +14,7 @@ const ClipListItem = ({
       }}
   >
     <Button icon secondary tooltipLabel="Play">play_arrow</Button>
-    {index > 0 &&
+    {index > 0 && !hideEditCapabilities &&
     <Button
       icon
       secondary
@@ -33,6 +33,7 @@ ClipListItem.propTypes = {
   index: PropTypes.number.isRequired,
   onClipSelected: PropTypes.func.isRequired,
   deleteClip: PropTypes.func.isRequired,
+  hideEditCapabilities: PropTypes.bool.isRequired,
 };
 
 export default ClipListItem;

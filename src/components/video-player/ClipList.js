@@ -6,10 +6,11 @@ import ClipListItem from './ClipListItem';
 const styleButton = { margin: 'auto 5px auto auto' };
 
 const ClipList = ({
-  clips, addClip, onClipSelected, deleteClip,
+  clips, addClip, onClipSelected, deleteClip, hideEditCapabilities,
 }) => (
   <Card className="md-block-centered">
     <CardTitle title="Clip list" subtitle="Select any to watch" >
+      {!hideEditCapabilities &&
       <Button
         tooltipLabel="Add clip"
         style={styleButton}
@@ -19,7 +20,7 @@ const ClipList = ({
         onClick={addClip}
       >
           add_circle_outline
-      </Button>
+      </Button>}
     </CardTitle>
     <CardText>
       <List style={{ minWidth: '220px' }}>
@@ -30,6 +31,7 @@ const ClipList = ({
               index={index}
               onClipSelected={onClipSelected}
               deleteClip={deleteClip}
+              hideEditCapabilities={hideEditCapabilities}
             />
           ))
         }
@@ -43,6 +45,7 @@ ClipList.propTypes = {
   addClip: PropTypes.func.isRequired,
   onClipSelected: PropTypes.func.isRequired,
   deleteClip: PropTypes.func.isRequired,
+  hideEditCapabilities: PropTypes.bool.isRequired,
 };
 
 export default ClipList;

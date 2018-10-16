@@ -5,7 +5,7 @@ import ClipList from './ClipList';
 import VideoPlayer from './VideoPlayer';
 
 const ClipAdminLayout = ({
-  clips, showDetails, onClipSelected, onDeleteClip, clipSelected, selectedIndex,
+  clips, showDetails, onClipSelected, onDeleteClip, clipSelected, selectedIndex, hideEditCapabilities,
 }) => (
   <Grid >
     <Cell size={3}>
@@ -14,6 +14,7 @@ const ClipAdminLayout = ({
         addClip={showDetails(true)}
         onClipSelected={onClipSelected}
         deleteClip={onDeleteClip}
+        hideEditCapabilities={hideEditCapabilities}
       />
     </Cell>
     <Cell size={9}>
@@ -21,6 +22,7 @@ const ClipAdminLayout = ({
         clip={clipSelected}
         editClip={showDetails(false)}
         selectedIndex={selectedIndex}
+        hideEditCapabilities={hideEditCapabilities}
       />
     </Cell>
   </Grid>
@@ -33,6 +35,7 @@ ClipAdminLayout.propTypes = {
   selectedIndex: PropTypes.number.isRequired,
   onDeleteClip: PropTypes.func.isRequired,
   showDetails: PropTypes.func.isRequired,
+  hideEditCapabilities: PropTypes.bool.isRequired,
 };
 
 export default ClipAdminLayout;

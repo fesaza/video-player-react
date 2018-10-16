@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import NavItemLink from './NavItemLink';
 import { navItems } from '../../utils/MenuItems';
 import ClipAdmin from '../video-player/ClipAdmin';
+import PlayList from '../video-player/PlayList';
 
 const styles = {
   content: { minHeight: 'auto' },
@@ -22,7 +23,8 @@ const AppPage = ({ toolbarTitle, location }) => (
     contentClassName="md-grid"
   >
     <Switch key={location.pathname}>
-      <Route path="/" component={ClipAdmin} />
+      <Route path="/" exact component={ClipAdmin} />
+      <Route path="/playlist" component={PlayList} />
     </Switch>
   </NavigationDrawer>
 );
