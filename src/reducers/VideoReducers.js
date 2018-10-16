@@ -27,6 +27,12 @@ const video = (state = {
         ...state,
         clips: R.update(action.index, action.clip, state.clips),
       };
+    case videoActions.DELETE_CLIP:
+      return {
+        ...state,
+        clips: R.remove(action.index, 1, state.clips),
+        selectedIndex: 0,
+      };
     default:
       return state;
   }

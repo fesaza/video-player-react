@@ -2,6 +2,7 @@ export const ADD_CLIP = 'ADD_CLIP';
 export const EDIT_CLIP = 'EDIT_CLIP';
 export const CLIP_SELECTED = 'CLIP_SELECTED';
 export const LOAD_CLIP_LIST = 'LOAD_CLIP_LIST';
+export const DELETE_CLIP = 'DELETE_CLIP';
 
 export const loadClips = () => ({
   type: LOAD_CLIP_LIST,
@@ -22,5 +23,10 @@ export const editClip = (clip, index) => ({
 
 export const selectClip = index => ({
   type: CLIP_SELECTED,
+  index,
+});
+
+export const deleteClip = index => ({
+  type: DELETE_CLIP,
   index,
 });

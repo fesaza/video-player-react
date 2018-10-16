@@ -5,6 +5,12 @@ import { DialogContainer, TextField, Button } from 'react-md';
 import * as videoActions from '../../actions/VideoActions';
 import { getClipsSelector } from '../../utils/Utils';
 
+const getInitialState = () => ({
+  name: '',
+  start: '',
+  end: '',
+});
+
 class VideoDetails extends PureComponent {
   static propTypes = {
     visible: PropTypes.bool.isRequired,
@@ -12,12 +18,14 @@ class VideoDetails extends PureComponent {
     clip: PropTypes.object.isRequired,
     save: PropTypes.func.isRequired,
     selectedIndex: PropTypes.number.isRequired,
+    // isAdding: PropTypes.bool.isRequired,
   };
 
   state = {};
 
-  componentWillReceiveProps = () => {
-    this.setState(this.props.clip);
+  componentWillReceiveProps = (nextProps) => {
+    this.setState(getInitialState());
+    this.setState(nextProps.clip);
   }
 
   onChange(property) {
@@ -32,12 +40,13 @@ class VideoDetails extends PureComponent {
     return () => {
       const { hide, save, selectedIndex } = this.props;
       save(this.state, selectedIndex);
+      this.setState(getInitialState());
       hide();
     };
   }
 
   render() {
-    const { visible, hide, clip } = this.props;
+    const { visible, hide } = this.props;
     const actions = [];
     actions.push({ secondary: true, children: 'Cancel', onClick: hide });
     actions.push(<Button flat primary onClick={this.onSave()}>Save</Button>);
@@ -77,11 +86,23 @@ class VideoDetails extends PureComponent {
   }
 }
 
-const mapStateToProps = (state, props) => ({
-  clip: state.video.selectedIndex > 0 && !props.isAdding ?
-    getClipsSelector(state)[state.video.selectedIndex] : {},
-  selectedIndex: props.isAdding ? -1 : state.video.selectedIndex || -1,
-});
+const mapStateToProps = (state, props) => {
+  if (props.isAdding) {
+    return {
+      clip: {},
+      selectedIndex: -1,
+    };
+  }
+  return {
+    clip: getClipsSelector(state)[state.video.selectedIndex],
+    selectedIndex: state.video.selectedIndex,
+  };
+};
+// ({
+//   clip: state.video.selectedIndex > 0 && !props.isAdding ?
+//     getClipsSelector(state)[state.video.selectedIndex] : {},
+//   selectedIndex: props.isAdding ? -1 : state.video.selectedIndex || -1,
+// });
 
 const mapDispatchToProps = dispatch => ({
   save: (clip, index) =>

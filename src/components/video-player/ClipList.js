@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List, ListItem, FontIcon, Card, CardTitle, CardText, Button } from 'react-md';
+import { List, ListItem, Card, CardTitle, CardText, Button } from 'react-md';
 
 const styleButton = { margin: 'auto 5px auto auto' };
 
-const ClipList = ({ clips, addClip, onClipSelected }) => (
+const ClipList = ({
+  clips, addClip, onClipSelected, deleteClip,
+}) => (
   <Card className="md-block-centered">
     <CardTitle title="Clip list" subtitle="Select any to watch" >
       <Button
@@ -24,13 +26,25 @@ const ClipList = ({ clips, addClip, onClipSelected }) => (
           clips.map((clip, index) => (
             <ListItem
               key={clip.name}
-              rightIcon={<FontIcon secondary>play_arrow</FontIcon>}
               primaryText={clip.name}
               secondaryText={`start: ${clip.start} - end: ${clip.end}`}
               onClick={() => {
                 onClipSelected(index);
               }}
-            />
+            >
+              <Button icon secondary tooltipLabel="Play">play_arrow</Button>
+              {index > 0 &&
+                <Button
+                  icon
+                  secondary
+                  tooltipLabel="Delete"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deleteClip(index);
+                  }}
+                >delete_outline
+                </Button>}
+            </ListItem>
           ))
         }
       </List>
@@ -42,6 +56,7 @@ ClipList.propTypes = {
   clips: PropTypes.array.isRequired,
   addClip: PropTypes.func.isRequired,
   onClipSelected: PropTypes.func.isRequired,
+  deleteClip: PropTypes.func.isRequired,
 };
 
 export default ClipList;

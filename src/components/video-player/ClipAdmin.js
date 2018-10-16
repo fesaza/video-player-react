@@ -17,6 +17,7 @@ class ClipAdmin extends PureComponent {
     clipSelected: PropTypes.object.isRequired,
     onClipSelected: PropTypes.func.isRequired,
     selectedIndex: PropTypes.number.isRequired,
+    onDeleteClip: PropTypes.func.isRequired,
   }
 
   state = { visibleDetails: false };
@@ -45,6 +46,7 @@ class ClipAdmin extends PureComponent {
               clips={this.props.clips}
               addClip={this.showDetails(true)}
               onClipSelected={this.props.onClipSelected}
+              deleteClip={this.props.onDeleteClip}
             />
           </Cell>
           <Cell size={9}>
@@ -76,6 +78,7 @@ const mapPropsToState = state => (
 const mapDispatchToProps = dispatch => ({
   loadClips: () => dispatch(videoActions.loadClips()),
   onClipSelected: index => dispatch(videoActions.selectClip(index)),
+  onDeleteClip: index => dispatch(videoActions.deleteClip(index)),
 });
 
 export default connect(mapPropsToState, mapDispatchToProps)(ClipAdmin);
