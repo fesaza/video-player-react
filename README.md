@@ -25,3 +25,8 @@ And run
 or with npm
 
 ```npm start```
+
+## Bonus tasks implemented
+
+- The ability to ‘save’ clips for persistent use (Local storage)
+- The ability to reuse the the player and playlist on another page (Playlist menu option)

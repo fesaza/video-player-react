@@ -1,7 +1,7 @@
 const TO_PREFIX = '';
 
 const navItems = [{
-  label: 'Clip list',
+  label: 'Clip list (Admin)',
   to: `${TO_PREFIX}/`,
   exact: true,
   icon: 'compare',

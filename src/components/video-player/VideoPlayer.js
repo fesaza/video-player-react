@@ -9,6 +9,7 @@ const styleButton = { margin: 'auto 10px auto auto' };
 
 const playVideo = () => {
   const vp = document.getElementById('videoPlayer');
+  //vp.onended = endedCallBack;
   vp.load();
   // vp.play();
 };
@@ -26,7 +27,6 @@ class VideoPlayer extends PureComponent {
       playVideo();
     }
   }
-
 
   render() {
     const {

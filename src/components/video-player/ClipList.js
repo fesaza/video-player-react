@@ -27,6 +27,7 @@ const ClipList = ({
         {
           clips.map((clip, index) => (
             <ClipListItem
+              key={clip.name}
               clip={clip}
               index={index}
               onClipSelected={onClipSelected}
