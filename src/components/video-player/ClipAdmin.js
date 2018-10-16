@@ -16,6 +16,7 @@ class ClipAdmin extends PureComponent {
     loadClips: PropTypes.func.isRequired,
     clipSelected: PropTypes.object.isRequired,
     onClipSelected: PropTypes.func.isRequired,
+    selectedIndex: PropTypes.number.isRequired,
   }
 
   state = { visibleDetails: false };
@@ -26,14 +27,6 @@ class ClipAdmin extends PureComponent {
       loadClips();
     }
   }
-
-  // addClip(){
-  //   // show dialog
-  // }
-
-  // editClip(){
-
-  // }
 
   showDetails = isAdding => () => {
     this.setState({ visibleDetails: true, isAdding });
@@ -58,6 +51,7 @@ class ClipAdmin extends PureComponent {
             <VideoPlayer
               clip={this.props.clipSelected}
               editClip={this.showDetails(false)}
+              selectedIndex={this.props.selectedIndex}
             />
           </Cell>
         </Grid>
@@ -75,6 +69,7 @@ const mapPropsToState = state => (
   {
     clips: [...getClipsSelector(state)],
     clipSelected: { ...getClipsSelector(state)[state.video.selectedIndex] },
+    selectedIndex: state.video.selectedIndex,
   }
 );
 

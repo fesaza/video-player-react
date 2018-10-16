@@ -14,6 +14,12 @@ export const addClip = clip => (
   }
 );
 
+export const editClip = (clip, index) => ({
+  type: EDIT_CLIP,
+  clip,
+  index,
+});
+
 export const selectClip = index => ({
   type: CLIP_SELECTED,
   index,

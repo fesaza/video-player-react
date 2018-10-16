@@ -10,9 +10,15 @@ class VideoDetails extends PureComponent {
     visible: PropTypes.bool.isRequired,
     hide: PropTypes.func.isRequired,
     clip: PropTypes.object.isRequired,
-    add: PropTypes.func.isRequired,
+    save: PropTypes.func.isRequired,
     selectedIndex: PropTypes.number.isRequired,
   };
+
+  state = {};
+
+  componentWillReceiveProps = () => {
+    this.setState(this.props.clip);
+  }
 
   onChange(property) {
     return (value) => {
@@ -24,10 +30,8 @@ class VideoDetails extends PureComponent {
 
   onSave() {
     return () => {
-      const { hide, add, selectedIndex } = this.props;
-      if (selectedIndex <= 0) {
-        add(this.state);
-      }
+      const { hide, save, selectedIndex } = this.props;
+      save(this.state, selectedIndex);
       hide();
     };
   }
@@ -48,7 +52,7 @@ class VideoDetails extends PureComponent {
         <TextField
           id="name-field"
           label="Clip name"
-          value={clip.name}
+          value={this.state.name}
           onChange={this.onChange('name')}
           required
         />
@@ -56,7 +60,7 @@ class VideoDetails extends PureComponent {
           id="start-field"
           label="start"
           type="number"
-          value={clip.start}
+          value={this.state.start}
           required
           onChange={this.onChange('start')}
         />
@@ -64,7 +68,7 @@ class VideoDetails extends PureComponent {
           id="end-field"
           label="end"
           type="number"
-          value={clip.end}
+          value={this.state.end}
           required
           onChange={this.onChange('end')}
         />
@@ -74,12 +78,16 @@ class VideoDetails extends PureComponent {
 }
 
 const mapStateToProps = (state, props) => ({
-  clip: state.video.selectedIndex > 0 && !props.isAdding ? getClipsSelector(state)[state.video.selectedIndex] : {},
+  clip: state.video.selectedIndex > 0 && !props.isAdding ?
+    getClipsSelector(state)[state.video.selectedIndex] : {},
   selectedIndex: props.isAdding ? -1 : state.video.selectedIndex || -1,
 });
 
 const mapDispatchToProps = dispatch => ({
-  add: clip => dispatch(videoActions.addClip(clip)),
+  save: (clip, index) =>
+    (index <= 0 ?
+      dispatch(videoActions.addClip(clip)) : dispatch(videoActions.editClip(clip, index))
+    ),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VideoDetails);

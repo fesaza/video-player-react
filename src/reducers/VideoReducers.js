@@ -22,6 +22,11 @@ const video = (state = {
         ...state,
         selectedIndex: action.index,
       };
+    case videoActions.EDIT_CLIP:
+      return {
+        ...state,
+        clips: R.update(action.index, action.clip, state.clips),
+      };
     default:
       return state;
   }
