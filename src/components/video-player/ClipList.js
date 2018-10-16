@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List, ListItem, Card, CardTitle, CardText, Button } from 'react-md';
+import { List, Card, CardTitle, CardText, Button } from 'react-md';
+import ClipListItem from './ClipListItem';
 
 const styleButton = { margin: 'auto 5px auto auto' };
 
@@ -24,27 +25,12 @@ const ClipList = ({
       <List style={{ minWidth: '220px' }}>
         {
           clips.map((clip, index) => (
-            <ListItem
-              key={clip.name}
-              primaryText={clip.name}
-              secondaryText={`start: ${clip.start} - end: ${clip.end}`}
-              onClick={() => {
-                onClipSelected(index);
-              }}
-            >
-              <Button icon secondary tooltipLabel="Play">play_arrow</Button>
-              {index > 0 &&
-                <Button
-                  icon
-                  secondary
-                  tooltipLabel="Delete"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    deleteClip(index);
-                  }}
-                >delete_outline
-                </Button>}
-            </ListItem>
+            <ClipListItem
+              clip={clip}
+              index={index}
+              onClipSelected={onClipSelected}
+              deleteClip={deleteClip}
+            />
           ))
         }
       </List>

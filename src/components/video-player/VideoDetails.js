@@ -18,7 +18,6 @@ class VideoDetails extends PureComponent {
     clip: PropTypes.object.isRequired,
     save: PropTypes.func.isRequired,
     selectedIndex: PropTypes.number.isRequired,
-    // isAdding: PropTypes.bool.isRequired,
   };
 
   state = {};
@@ -48,8 +47,8 @@ class VideoDetails extends PureComponent {
   render() {
     const { visible, hide } = this.props;
     const actions = [];
-    actions.push({ secondary: true, children: 'Cancel', onClick: hide });
-    actions.push(<Button flat primary onClick={this.onSave()}>Save</Button>);
+    actions.push({ primary: true, children: 'Cancel', onClick: hide });
+    actions.push(<Button flat secondary onClick={this.onSave()}>Save</Button>);
     return (
       <DialogContainer
         id="details-dialog"
@@ -98,11 +97,6 @@ const mapStateToProps = (state, props) => {
     selectedIndex: state.video.selectedIndex,
   };
 };
-// ({
-//   clip: state.video.selectedIndex > 0 && !props.isAdding ?
-//     getClipsSelector(state)[state.video.selectedIndex] : {},
-//   selectedIndex: props.isAdding ? -1 : state.video.selectedIndex || -1,
-// });
 
 const mapDispatchToProps = dispatch => ({
   save: (clip, index) =>

@@ -1,13 +1,10 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-// import * as R from 'ramda';
-import { Grid, Cell } from 'react-md';
 import { connect } from 'react-redux';
-import ClipList from './ClipList';
-import VideoPlayer from './VideoPlayer';
 import * as videoActions from '../../actions/VideoActions';
 import VideoDetails from './VideoDetails';
+import ClipAdminLayout from './ClipAdminLayout';
 import { getClipsSelector } from '../../utils/Utils';
 
 class ClipAdmin extends PureComponent {
@@ -40,23 +37,14 @@ class ClipAdmin extends PureComponent {
   render() {
     return (
       <div>
-        <Grid >
-          <Cell size={3}>
-            <ClipList
-              clips={this.props.clips}
-              addClip={this.showDetails(true)}
-              onClipSelected={this.props.onClipSelected}
-              deleteClip={this.props.onDeleteClip}
-            />
-          </Cell>
-          <Cell size={9}>
-            <VideoPlayer
-              clip={this.props.clipSelected}
-              editClip={this.showDetails(false)}
-              selectedIndex={this.props.selectedIndex}
-            />
-          </Cell>
-        </Grid>
+        <ClipAdminLayout
+          clips={this.props.clips}
+          showDetails={this.showDetails}
+          onClipSelected={this.props.onClipSelected}
+          onDeleteClip={this.props.onDeleteClip}
+          clipSelected={this.props.clipSelected}
+          selectedIndex={this.props.selectedIndex}
+        />
         <VideoDetails
           visible={this.state.visibleDetails}
           hide={this.hideDetails}
